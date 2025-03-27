@@ -15,7 +15,7 @@ export const userProxyConfigSchema = z.object({
     proxy_password: z.string().optional(),
     proxy_url: z.string().optional(),
     global_config: z.enum(['0', '1']).optional()
-}).describe('The user proxy config of the browser');
+}).describe('The user proxy config of the browser, default is proxy_soft: no_proxy');
 
 // 浏览器内核配置的 Schema
 export const browserKernelConfigSchema = z.object({
@@ -27,7 +27,7 @@ export const browserKernelConfigSchema = z.object({
         z.literal("ua_auto")
     ]).optional(),
     type: z.enum(['chrome', 'firefox']).optional()
-}).optional();
+}).optional().describe('The browser kernel config of the browser, default is version: ua_auto, type: chrome');
 
 // 随机 UA 配置的 Schema
 export const randomUaConfigSchema = z.object({
@@ -41,7 +41,7 @@ export const randomUaConfigSchema = z.object({
             'Linux'
         ])
     ).optional()
-}).optional();
+}).optional().describe('The random UA config of the browser, default is ua_version: [], ua_system_version: []');
 
 // 指纹配置的 Schema
 export const fingerprintConfigSchema = z.object({
@@ -55,7 +55,7 @@ export const fingerprintConfigSchema = z.object({
     random_ua: randomUaConfigSchema,
     tls_switch: z.enum(['0', '1']).optional(),
     tls: z.string().optional()
-}).optional();
+}).optional().describe('The fingerprint config of the browser, default is automatic_timezone: 0, timezone: "", language: [], flash: "", fonts: [], webrtc: disabled, browser_kernel_config: ua_auto, random_ua: ua_version: [], ua_system_version: [], tls_switch: 0, tls: ""');
 
 // 创建浏览器的参数 Schema
 export const createBrowserParamsSchema = z.object({

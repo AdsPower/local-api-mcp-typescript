@@ -8,12 +8,12 @@ const userProxyConfigSchema = z.object({
         'ssh', 'other', 'no_proxy'
     ]).describe('The proxy soft of the browser'),
     proxy_type: z.enum(['http', 'https', 'socks5', 'no_proxy']).optional(),
-    proxy_host: z.string().optional(),
-    proxy_port: z.string().optional(),
-    proxy_user: z.string().optional(),
-    proxy_password: z.string().optional(),
-    proxy_url: z.string().optional(),
-    global_config: z.enum(['0', '1']).optional()
+    proxy_host: z.string().optional().describe('The proxy host of the browser, eg: 127.0.0.1'),
+    proxy_port: z.string().optional().describe('The proxy port of the browser, eg: 8080'),
+    proxy_user: z.string().optional().describe('The proxy user of the browser, eg: user'),
+    proxy_password: z.string().optional().describe('The proxy password of the browser, eg: password'),
+    proxy_url: z.string().optional().describe('The proxy url of the browser, eg: http://127.0.0.1:8080'),
+    global_config: z.enum(['0', '1']).optional().describe('The global config of the browser, default is 0')
 }).describe('The user proxy config of the browser');
 
 // Browser Kernel Config Schema
@@ -24,9 +24,9 @@ const browserKernelConfigSchema = z.object({
         z.literal("113"), z.literal("116"), z.literal("120"),
         z.literal("126"), z.literal("130"), z.literal("134"),
         z.literal("ua_auto")
-    ]).optional(),
-    type: z.enum(['chrome', 'firefox']).optional()
-}).optional();
+    ]).optional().describe('The version of the browser, default is ua_auto'),
+    type: z.enum(['chrome', 'firefox']).optional().describe('The type of the browser, default is chrome')
+}).optional().describe('The browser kernel config of the browser, default is version: ua_auto, type: chrome');
 
 // Random UA Config Schema
 const randomUaConfigSchema = z.object({
@@ -39,55 +39,53 @@ const randomUaConfigSchema = z.object({
             'Mac OS X 10', 'Mac OS X 11', 'Mac OS X 12', 'Mac OS X 13',
             'Linux'
         ])
-    ).optional()
-}).optional();
+    ).optional().describe('The ua system version of the browser, eg: ["Android 9", "iOS 14"]')
+}).optional().describe('The random ua config of the browser, default is ua_version: [], ua_system_version: []');
 
 // Fingerprint Config Schema
 const fingerprintConfigSchema = z.object({
-    automatic_timezone: z.enum(['0', '1']).optional(),
-    timezone: z.string().optional(),
-    language: z.array(z.string()).optional(),
-    flash: z.string().optional(),
-    fonts: z.array(z.string()).optional(),
-    webrtc: z.enum(['disabled', 'forward', 'proxy', 'local']).optional(),
+    automatic_timezone: z.enum(['0', '1']).optional().describe('The automatic timezone of the browser, default is 0'),
+    timezone: z.string().optional().describe('The timezone of the browser, eg: Asia/Shanghai'),
+    language: z.array(z.string()).optional().describe('The language of the browser, eg: ["en-US", "zh-CN"]'),
+    flash: z.enum(['block', 'allow']).optional().describe('The flash of the browser, default is disabled'),
+    fonts: z.array(z.string()).optional().describe('The fonts of the browser, eg: ["Arial", "Times New Roman"]'),
+    webrtc: z.enum(['disabled', 'forward', 'proxy', 'local']).optional().describe('The webrtc of the browser, default is disabled'),
     browser_kernel_config: browserKernelConfigSchema,
     random_ua: randomUaConfigSchema,
-    tls_switch: z.enum(['0', '1']).optional(),
-    tls: z.string().optional()
-}).optional();
+    tls_switch: z.enum(['0', '1']).optional().describe('The tls switch of the browser, default is 0'),
+    tls: z.string().optional().describe('The tls of the browser, default is ""')
+}).optional().describe('The fingerprint config of the browser, default is automatic_timezone: 0, timezone: "", language: [], flash: "", fonts: [], webrtc: disabled, browser_kernel_config: ua_auto, random_ua: ua_version: [], ua_system_version: [], tls_switch: 0, tls: ""');
 
 export const schemas = {
     // Browser Related Schema
     createBrowserSchema: z.object({
-        domainName: z.string().optional(),
-        openUrls: z.array(z.string()).optional(),
-        cookie: z.string().optional(),
-        username: z.string().optional(),
-        password: z.string().optional(),
-        system: z.string().optional(),
-        groupId: z.string(),
-        name: z.string().optional(),
-        country: z.string().optional(),
-        sysAppCateId: z.string().optional(),
+        domainName: z.string().optional().describe('The domain name of the browser, eg: facebook.com'),
+        openUrls: z.array(z.string()).optional().describe('The open urls of the browser, eg: ["https://www.google.com"]'),
+        cookie: z.string().optional().describe('The cookie of the browser, eg: "[{\"domain\":\".baidu.com\",\"expirationDate\":\"\",\"name\":\"\",\"path\":\"/\",\"sameSite\":\"unspecified\",\"secure\":true,\"value\":\"\",\"id\":1}]"'),
+        username: z.string().optional().describe('The username of the browser, eg: "user"'),
+        password: z.string().optional().describe('The password of the browser, eg: "password"'),
+        groupId: z.string().describe('The group id of the browser, must be a valid group id, if not, you can use the get-group-list tool to get the group list or create a new group'),
+        name: z.string().optional().describe('The name of the browser, eg: "My Browser"'),
+        country: z.string().optional().describe('The country of the browser, eg: "CN"'),
+        sysAppCateId: z.string().optional().describe('The sys app cate id of the browser, you can use the get-application-list tool to get the application list'),
         userProxyConfig: userProxyConfigSchema,
         fingerprintConfig: fingerprintConfigSchema,
-        storageStrategy: z.number().optional()
+        storageStrategy: z.number().optional().describe('The storage strategy of the browser, default is 0')
     }),
 
     updateBrowserSchema: z.object({
-        domainName: z.string().optional(),
-        openUrls: z.array(z.string()).optional(),
-        cookie: z.string().optional(),
-        username: z.string().optional(),
-        password: z.string().optional(),
-        system: z.string().optional(),
-        groupId: z.string(),
-        name: z.string().optional(),
-        country: z.string().optional(),
-        sysAppCateId: z.string().optional(),
+        domainName: z.string().optional().describe('The domain name of the browser, eg: facebook.com'),
+        openUrls: z.array(z.string()).optional().describe('The open urls of the browser, eg: ["https://www.google.com"]'),
+        cookie: z.string().optional().describe('The cookie of the browser, eg: "[{\"domain\":\".baidu.com\",\"expirationDate\":\"\",\"name\":\"\",\"path\":\"/\",\"sameSite\":\"unspecified\",\"secure\":true,\"value\":\"\",\"id\":1}]"'),
+        username: z.string().optional().describe('The username of the browser, eg: "user"'),
+        password: z.string().optional().describe('The password of the browser, eg: "password"'),
+        groupId: z.string().describe('The group id of the browser, must be a valid group id, if not, you can use the get-group-list tool to get the group list or create a new group'),
+        name: z.string().optional().describe('The name of the browser, eg: "My Browser"'),
+        country: z.string().optional().describe('The country of the browser, eg: "CN"'),
+        sysAppCateId: z.string().optional().describe('The sys app cate id of the browser, you can use the get-application-list tool to get the application list'),
         userProxyConfig: userProxyConfigSchema,
         fingerprintConfig: fingerprintConfigSchema,
-        storageStrategy: z.number().optional(),
+        storageStrategy: z.number().optional().describe('The storage strategy of the browser, default is 0'),
         userId: z.string().describe('The user id of the browser to update')
     }),
 

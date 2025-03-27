@@ -9,7 +9,6 @@ export function buildRequestBody(params: CreateBrowserParams | UpdateBrowserPara
         cookie: 'cookie',
         username: 'username',
         password: 'password',
-        system: 'system',
         groupId: 'group_id',
         name: 'name',
         country: 'country',

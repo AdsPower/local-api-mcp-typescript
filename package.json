@@ -1,10 +1,10 @@
 {
-  "name": "adspower-local-api-mcp",
+  "name": "local-api-mcp-typescript",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "adspower": "./build/index.js"
+    "adspower-local-api-mcp": "./build/index.js"
   },
   "scripts": {
     "build": "tsc && chmod 755 ./build/index.js",
@@ -13,8 +13,13 @@
   "files": [
     "build"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ads-power",
+    "local-api",
+    "mcp",
+    "typescript"
+  ],
+  "author": "AdsPower",
   "license": "ISC",
   "description": "",
   "dependencies": {
