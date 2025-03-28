@@ -43,13 +43,12 @@ export const browserHandlers = {
         if (response.data.code === 0) {
             return `Browser created successfully with: ${Object.entries(response.data.data).map(([key, value]) => `${key}: ${value}`).join('\n')}`;
         }
-        throw new Error(`Failed to create browser: ${response.data.message}`);
+        throw new Error(`Failed to create browser: ${response.data.msg}`);
     },
 
     async updateBrowser(params: UpdateBrowserParams) {
         const requestBody = buildRequestBody({
-            ...params,
-            userId: undefined
+            ...params
         });
         requestBody.user_id = params.userId;
 
@@ -58,7 +57,7 @@ export const browserHandlers = {
         if (response.data.code === 0) {
             return `Browser updated successfully with: ${Object.entries(response.data.data).map(([key, value]) => `${key}: ${value}`).join('\n')}`;
         }
-        throw new Error(`Failed to update browser: ${response.data.message}`);
+        throw new Error(`Failed to update browser: ${response.data.msg}`);
     },
 
     async deleteBrowser({ userIds }: DeleteBrowserParams) {
@@ -69,7 +68,7 @@ export const browserHandlers = {
         if (response.data.code === 0) {
             return `Browsers deleted successfully: ${userIds.join(', ')}`;
         }
-        throw new Error(`Failed to delete browsers: ${response.data.message}`);
+        throw new Error(`Failed to delete browsers: ${response.data.msg}`);
     },
 
     async getBrowserList(params: GetBrowserListParams) {
@@ -103,7 +102,7 @@ export const browserHandlers = {
         if (response.data.code === 0) {
             return `Opened browser list: ${JSON.stringify(response.data.data.list, null, 2)}`;
         }
-        throw new Error(`Failed to get opened browsers: ${response.data.message}`);
+        throw new Error(`Failed to get opened browsers: ${response.data.msg}`);
     },
 
     async moveBrowser({ groupId, userIds }: MoveBrowserParams) {
@@ -115,6 +114,6 @@ export const browserHandlers = {
         if (response.data.code === 0) {
             return `Browsers moved successfully to group ${groupId}: ${userIds.join(', ')}`;
         }
-        throw new Error(`Failed to move browsers: ${response.data.message}`);
+        throw new Error(`Failed to move browsers: ${response.data.msg}`);
     }
 }; 

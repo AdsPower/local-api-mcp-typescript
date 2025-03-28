@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LOCAL_API_BASE, API_ENDPOINTS } from '../constants/api.js';
-import type { GetApplicationListParams } from '../types/application.js';
+import type { GetApplicationListParams } from '../types/schemas.js';
 
 export const applicationHandlers = {
     async getApplicationList({ size }: GetApplicationListParams) {

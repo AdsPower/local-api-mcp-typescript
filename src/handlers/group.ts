@@ -4,7 +4,7 @@ import type {
     CreateGroupParams,
     UpdateGroupParams,
     GetGroupListParams
-} from '../types/group.js';
+} from '../types/schemas.js';
 
 export const groupHandlers = {
     async createGroup({ groupName, remark }: CreateGroupParams) {
@@ -21,7 +21,7 @@ export const groupHandlers = {
         if (response.data.code === 0) {
             return `Group created successfully with name: ${groupName}${remark ? `, remark: ${remark}` : ''}`;
         }
-        throw new Error(`Failed to create group: ${response.data.message}`);
+        throw new Error(`Failed to create group: ${response.data.msg}`);
     },
 
     async updateGroup({ groupId, groupName, remark }: UpdateGroupParams) {
@@ -39,7 +39,7 @@ export const groupHandlers = {
         if (response.data.code === 0) {
             return `Group updated successfully with id: ${groupId}, name: ${groupName}${remark !== undefined ? `, remark: ${remark === null ? '(cleared)' : remark}` : ''}`;
         }
-        throw new Error(`Failed to update group: ${response.data.message}`);
+        throw new Error(`Failed to update group: ${response.data.msg}`);
     },
 
     async getGroupList({ name, size }: GetGroupListParams) {

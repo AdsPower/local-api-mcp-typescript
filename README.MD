@@ -5,7 +5,7 @@ A Model Context Protocol server that AdsPower browser LocalAPI. This server enab
 
 ## Usage with Claude Desktop
 
-Tall to LLMs to create browser: `Create an Android UA browser using Chrome 134`
+Talk to LLMs to create browser: `Create an Android UA browser using Chrome 134`
 
 ![Claude desktop](./assets/claude-use.png)
 
