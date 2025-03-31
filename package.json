@@ -1,20 +1,20 @@
 {
   "name": "local-api-mcp-typescript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "type": "module",
   "bin": {
     "adspower-local-api-mcp": "./build/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod 755 ./build/index.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
     "build"
   ],
   "keywords": [
-    "ads-power",
+    "adspower",
     "local-api",
     "mcp",
     "typescript"
@@ -30,5 +30,16 @@
   "devDependencies": {
     "@types/node": "^22.13.13",
     "typescript": "^5.8.2"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdsPower/local-api-mcp-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AdsPower/local-api-mcp-typescript/issues"
+  },
+  "homepage": "https://github.com/AdsPower/local-api-mcp-typescript#readme"
 }

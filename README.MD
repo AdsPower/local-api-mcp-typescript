@@ -7,13 +7,38 @@ A Model Context Protocol server that AdsPower browser LocalAPI. This server enab
 
 Talk to LLMs to create browser: `Create an Android UA browser using Chrome 134`
 
-![Claude desktop](./assets/claude-use.png)
+![Claude desktop](https://github.com/AdsPower/local-api-mcp-typescript/blob/main/assets/claude-use.png)
 
 Talk to LLMs to create browser: `Help me with random UA, random fingerprint, random cookie generation, create 3 browsers, use 134 cores, and open them`
 
-![Claude desktop](./assets/claude-open.gif)
+![Claude desktop](https://github.com/AdsPower/local-api-mcp-typescript/blob/main/assets/claude-open.gif)
 
-### Node
+## How to use?
+
+### Requirements
+
+- [AdsPower](https://www.adspower.com/?source=github)
+
+- Node version 18 or greater
+
+### Installation
+
+To use with Claude Desktop, add the server config:
+
+On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json` On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
+
+```bash
+{
+  "mcpServers": {
+    "adspower-local-api": {
+      "command": "npx",
+      "args": ["-y", "local-api-mcp-typescript"]
+    }
+  }
+}
+```
+
+## Development
 
 ```bash
 # git clone 
@@ -29,7 +54,7 @@ npm run build
 ```bash
 # Add the server to your claude_desktop_config.json
 "mcpServers": {
-  "ads-local-api-mcp": {
+  "adspower-local-api": {
         "command": "node",
         "args": [
             "<Replace Your Project Path>/local-api-mcp-typescript/build/index.js"
@@ -38,7 +63,7 @@ npm run build
 }
 ```
 
-![Claude desktop MCP](./assets/claude-installed.png)
+![Claude desktop MCP](https://github.com/AdsPower/local-api-mcp-typescript/blob/main/assets/claude-installed.png)
 
 ## Components
 
