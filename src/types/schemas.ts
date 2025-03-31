@@ -93,20 +93,24 @@ export const schemas = {
         userProxyConfig: userProxyConfigSchema.optional(),
         fingerprintConfig: fingerprintConfigSchema.optional(),
         storageStrategy: z.number().optional().describe('The storage strategy of the browser, default is 0'),
-        userId: z.string().describe('The user id of the browser to update')
+        userId: z.string().describe('The user id of the browser to update, it is required when you want to update the browser')
     }),
 
     openBrowserSchema: z.object({
         serialNumber: z.string().optional().describe('The serial number of the browser to open'),
-        userId: z.string().optional().describe('The browser id of the browser to open')
+        userId: z.string().optional().describe('The browser id of the browser to open'),
+        ipTab: z.enum(['0', '1']).optional().describe('The ip tab of the browser, 0 is not use ip tab, 1 is use ip tab, default is 0'),
+        launchArgs: z.string().optional().describe(`The launch args of the browser, use chrome launch args, eg: ${JSON.stringify(["--blink-settings=imagesEnabled=false", "--disable-notifications"])}`),
+        clearCacheAfterClosing: z.enum(['0', '1']).optional().describe('The clear cache after closing of the browser, 0 is not clear cache after closing, 1 is clear cache after closing, default is 0'),
+        cdpMask: z.enum(['0', '1']).optional().describe('The cdp mask of the browser, 0 is not use cdp mask, 1 is use cdp mask, default is 0'),
     }).strict(),
 
     closeBrowserSchema: z.object({
-        userId: z.string().describe('The browser id of the browser to stop')
+        userId: z.string().describe('The browser id of the browser to stop, it is required when you want to stop the browser')
     }).strict(),
 
     deleteBrowserSchema: z.object({
-        userIds: z.array(z.string()).describe('The user ids of the browsers to delete')
+        userIds: z.array(z.string()).describe('The user ids of the browsers to delete, it is required when you want to delete the browser')
     }).strict(),
 
     getBrowserListSchema: z.object({

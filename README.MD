@@ -9,6 +9,10 @@ Talk to LLMs to create browser: `Create an Android UA browser using Chrome 134`
 
 ![Claude desktop](./assets/claude-use.png)
 
+Talk to LLMs to create browser: `Help me with random UA, random fingerprint, random cookie generation, create 3 browsers, use 134 cores, and open them`
+
+![Claude desktop](./assets/claude-open.gif)
+
 ### Node
 
 ```bash

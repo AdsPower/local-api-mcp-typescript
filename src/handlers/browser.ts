@@ -12,7 +12,7 @@ import type {
 } from '../types/browser.js';
 
 export const browserHandlers = {
-    async openBrowser({ serialNumber, userId }: OpenBrowserParams) {
+    async openBrowser({ serialNumber, userId, ipTab, launchArgs, clearCacheAfterClosing, cdpMask }: OpenBrowserParams) {
         const params = new URLSearchParams();
         if (serialNumber) {
             params.set('serial_number', serialNumber);
@@ -20,13 +20,25 @@ export const browserHandlers = {
         if (userId) {
             params.set('user_id', userId);
         }
+        if (ipTab) {
+            params.set('open_tabs', ipTab);
+        }
+        if (launchArgs) {
+            params.set('launch_args', launchArgs);
+        }
+        if (clearCacheAfterClosing) {
+            params.set('clear_cache_after_closing', clearCacheAfterClosing);
+        }
+        if (cdpMask) {
+            params.set('cdp_mask', cdpMask);
+        }
         params.set('open_tabs', '0');
 
         const response = await axios.get(`${LOCAL_API_BASE}${API_ENDPOINTS.START_BROWSER}`, { params });
         if (response.data.code === 0) {
             return `Browser opened successfully with: ${Object.entries(response.data.data).map(([key, value]) => `${key}: ${value}`).join('\n')}`;
         }
-        throw new Error(`Failed to open browser: ${response.data.message}`);
+        throw new Error(`Failed to open browser: ${response.data.msg}`);
     },
 
     async closeBrowser({ userId }: CloseBrowserParams) {
