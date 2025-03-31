@@ -27,6 +27,7 @@ To use with Claude Desktop, add the server config:
 
 On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json` On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
+#### MacOS / Linux
 ```bash
 {
   "mcpServers": {
@@ -37,6 +38,23 @@ On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json` On W
   }
 }
 ```
+
+#### Windows
+```bash
+{
+  "mcpServers": {
+    "adspower-local-api": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "local-api-mcp-typescript"]
+    }
+  }
+}
+```
+
+![Claude desktop MCP](https://github.com/AdsPower/local-api-mcp-typescript/blob/main/assets/claude-installed.png)
+
+or use in Cursor
+![Cursor](./assets/cursor.png)
 
 ## Development
 
@@ -62,8 +80,6 @@ npm run build
     }
 }
 ```
-
-![Claude desktop MCP](https://github.com/AdsPower/local-api-mcp-typescript/blob/main/assets/claude-installed.png)
 
 ## Components
 
