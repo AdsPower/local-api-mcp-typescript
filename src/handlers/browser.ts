@@ -36,7 +36,12 @@ export const browserHandlers = {
 
         const response = await axios.get(`${LOCAL_API_BASE}${API_ENDPOINTS.START_BROWSER}`, { params });
         if (response.data.code === 0) {
-            return `Browser opened successfully with: ${Object.entries(response.data.data).map(([key, value]) => `${key}: ${value}`).join('\n')}`;
+            return `Browser opened successfully with: ${Object.entries(response.data.data).map(([key, value]) => {
+                if (value && typeof value === 'object') {
+                    return Object.entries(value).map(([key, value]) => `ws.${key}: ${value}`).join('\n');
+                }
+                return `${key}: ${value}`;
+            }).join('\n')}`;
         }
         throw new Error(`Failed to open browser: ${response.data.msg}`);
     },

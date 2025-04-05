@@ -4,7 +4,7 @@ import type {
     CreateGroupParams,
     UpdateGroupParams,
     GetGroupListParams
-} from '../types/schemas.js';
+} from '../types/group.js';
 
 export const groupHandlers = {
     async createGroup({ groupName, remark }: CreateGroupParams) {

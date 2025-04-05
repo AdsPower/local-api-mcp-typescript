@@ -4,10 +4,11 @@ import { groupHandlers } from '../handlers/group.js';
 import { applicationHandlers } from '../handlers/application.js';
 import { schemas } from '../types/schemas.js';
 import { wrapHandler } from './handlerWrapper.js';
+import { automationHandlers } from '../handlers/automation.js';
 
 export function registerTools(server: McpServer) {
     // Browser tools
-    server.tool('open-browser', 'Open the browser', schemas.openBrowserSchema.shape, 
+    server.tool('open-browser', 'Open the browser, both environment and profile mean browser', schemas.openBrowserSchema.shape, 
         wrapHandler(browserHandlers.openBrowser));
     
     server.tool('close-browser', 'Close the browser', schemas.closeBrowserSchema.shape,
@@ -44,4 +45,20 @@ export function registerTools(server: McpServer) {
     // Application tools
     server.tool('get-application-list', 'Get the list of applications', schemas.getApplicationListSchema.shape,
         wrapHandler(applicationHandlers.getApplicationList));
+    
+    // Automation tools
+    server.tool('connect-browser-with-ws', 'Connect the browser with the ws url', schemas.createAutomationSchema.shape,
+        wrapHandler(automationHandlers.connectBrowserWithWs));
+    
+    server.tool('open-new-page', 'Open a new page', schemas.emptySchema.shape,
+        wrapHandler(automationHandlers.openNewPage));
+        
+    server.tool('navigate', 'Navigate to the url', schemas.navigateSchema.shape,
+        wrapHandler(automationHandlers.navigate));
+
+    server.tool('screenshot', 'Get the screenshot of the page', schemas.screenshotSchema.shape,
+        wrapHandler(automationHandlers.screenshot));
+
+    server.tool('get-page-visible-text', 'Get the visible text content of the page', schemas.emptySchema.shape,
+        wrapHandler(automationHandlers.getPageVisibleText));
 } 
