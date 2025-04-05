@@ -6,7 +6,7 @@ import { registerTools } from './utils/toolRegister.js';
 // Create server instance
 const server = new McpServer({
     name: 'adspower-local-api',
-    version: '1.0.0',
+    version: '1.0.3',
     capabilities: {
         resources: {},
         tools: {},

@@ -10,6 +10,7 @@ export interface UpdateGroupParams {
 }
 
 export interface GetGroupListParams {
-    name?: string;
+    groupName?: string;
     size?: number;
+    page?: number;
 } 

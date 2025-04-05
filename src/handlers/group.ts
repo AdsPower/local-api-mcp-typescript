@@ -42,13 +42,16 @@ export const groupHandlers = {
         throw new Error(`Failed to update group: ${response.data.msg}`);
     },
 
-    async getGroupList({ name, size }: GetGroupListParams) {
+    async getGroupList({ groupName, size, page }: GetGroupListParams) {
         const params = new URLSearchParams();
-        if (name) {
-            params.set('group_name', name);
+        if (groupName) {
+            params.set('group_name', groupName);
         }
         if (size) {
             params.set('page_size', size.toString());
+        }
+        if (page) {
+            params.set('page', page.toString());
         }
 
         const response = await axios.get(`${LOCAL_API_BASE}${API_ENDPOINTS.GET_GROUP_LIST}`, { params });

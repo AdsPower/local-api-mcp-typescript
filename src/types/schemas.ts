@@ -118,7 +118,8 @@ export const schemas = {
             .regex(/^\d+$/, "Group ID must be a numeric string")
             .optional()
             .describe('The group id of the browser, must be a numeric string (e.g., "123"). You can use the get-group-list tool to get the group list'),
-        size: z.number().optional().describe('The size of the page'),
+        size: z.number().optional().describe('The size of the page, max is 100, if get more than 100, you need to use the page to get the next page, default is 10'),
+        page: z.number().optional().describe('The page of the browser, default is 1'),
         id: z.string().optional().describe('The id of the browser'),
         serialNumber: z.string().optional().describe('The serial number of the browser'),
         sort: z.enum(['serial_number', 'last_open_time', 'created_time']).optional()
@@ -149,8 +150,9 @@ export const schemas = {
     }).strict(),
 
     getGroupListSchema: z.object({
-        name: z.string().optional().describe('The name of the group'),
-        size: z.number().optional().describe('The size of the page')
+        groupName: z.string().optional().describe('The name of the group to search, use like to search, often used group name to find the group id, so eg: "test" will search "test" and "test1"'),
+        size: z.number().optional().describe('The size of the page, max is 100, if get more than 100, you need to use the page to get the next page, default is 10'),
+        page: z.number().optional().describe('The page of the group, default is 1')
     }).strict(),
 
     // Application Related Schema

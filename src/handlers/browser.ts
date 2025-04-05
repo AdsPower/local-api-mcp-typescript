@@ -84,10 +84,13 @@ export const browserHandlers = {
     },
 
     async getBrowserList(params: GetBrowserListParams) {
-        const { groupId, size, id, serialNumber, sort, order } = params;
+        const { groupId, size, id, serialNumber, sort, order, page } = params;
         const urlParams = new URLSearchParams();
         if (size) {
             urlParams.set('page_size', size.toString());
+        }
+        if (page) {
+            urlParams.set('page', page.toString());
         }
         if (id) {
             urlParams.set('user_id', id);
