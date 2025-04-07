@@ -100,7 +100,7 @@ export const schemas = {
         serialNumber: z.string().optional().describe('The serial number of the browser to open'),
         userId: z.string().optional().describe('The browser id of the browser to open'),
         ipTab: z.enum(['0', '1']).optional().describe('The ip tab of the browser, 0 is not use ip tab, 1 is use ip tab, default is 0'),
-        launchArgs: z.string().optional().describe(`The launch args of the browser, use chrome launch args, eg: ${JSON.stringify(["--blink-settings=imagesEnabled=false", "--disable-notifications"])}`),
+        launchArgs: z.string().optional().describe(`The launch args of the browser, use chrome launch args, eg: ${JSON.stringify(["--blink-settings=imagesEnabled=false", "--disable-notifications"])}, or vista url, eg: ${JSON.stringify(["https://www.adspower.net"])}`),
         clearCacheAfterClosing: z.enum(['0', '1']).optional().describe('The clear cache after closing of the browser, 0 is not clear cache after closing, 1 is clear cache after closing, default is 0'),
         cdpMask: z.enum(['0', '1']).optional().describe('The cdp mask of the browser, 0 is not use cdp mask, 1 is use cdp mask, default is 0'),
     }).strict(),
@@ -161,25 +161,21 @@ export const schemas = {
     }).strict(),
 
     // Empty Schema
-    emptySchema: z.object({}).strict()
+    emptySchema: z.object({}).strict(),
+
+    // Automation Related Schema
+    createAutomationSchema: z.object({
+        userId: z.string().optional().describe('The browser id of the browser to connect'),
+        serialNumber: z.string().optional().describe('The serial number of the browser to connect'),
+        wsUrl: z.string().describe('The ws url of the browser, get from the open-browser tool content `ws.puppeteer`')
+    }).strict(),
+
+    navigateSchema: z.object({
+        url: z.string().describe('The url to navigate to')
+    }).strict(),
+
+    screenshotSchema: z.object({
+        savePath: z.string().optional().describe('The path to save the screenshot'),
+        isFullPage: z.boolean().optional().describe('The is full page of the screenshot')
+    }).strict(),
 };
-
-export type {
-    CreateBrowserParams,
-    UpdateBrowserParams,
-    OpenBrowserParams,
-    CloseBrowserParams,
-    DeleteBrowserParams,
-    GetBrowserListParams,
-    MoveBrowserParams
-} from './browser.js';
-
-export type {
-    CreateGroupParams,
-    UpdateGroupParams,
-    GetGroupListParams
-} from './group.js';
-
-export type {
-    GetApplicationListParams
-} from './application.js'; 
