@@ -3,12 +3,17 @@ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 export function wrapHandler(handler: Function) {
     return async (params: any): Promise<CallToolResult> => {
         try {
-            const result = await handler(params);
+            const content = await handler(params);
+            if (typeof content === 'string') {
+                return {
+                    content: [{
+                        type: 'text' as const,
+                        text: content
+                    }]
+                };
+            }
             return {
-                content: [{
-                    type: 'text' as const,
-                    text: result
-                }]
+                content
             };
         } catch (error) {
             return {

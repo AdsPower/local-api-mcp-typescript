@@ -178,4 +178,35 @@ export const schemas = {
         savePath: z.string().optional().describe('The path to save the screenshot'),
         isFullPage: z.boolean().optional().describe('The is full page of the screenshot')
     }).strict(),
+
+    clickElementSchema: z.object({
+        selector: z.string().describe('The selector of the element to click, find from the page source code')
+    }).strict(),
+
+    fillInputSchema: z.object({
+        selector: z.string().describe('The selector of the input to fill, find from the page source code'),
+        text: z.string().describe('The text to fill in the input')
+    }).strict(),
+
+    selectOptionSchema: z.object({
+        selector: z.string().describe('The selector of the option to select, find from the page source code'),
+        value: z.string().describe('The value of the option to select')
+    }).strict(),
+
+    hoverElementSchema: z.object({
+        selector: z.string().describe('The selector of the element to hover, find from the page source code')
+    }).strict(),
+
+    scrollElementSchema: z.object({
+        selector: z.string().describe('The selector of the element to scroll, find from the page source code')
+    }).strict(),
+
+    pressKeySchema: z.object({
+        key: z.string().describe('The key to press, eg: "Enter"'),
+        selector: z.string().optional().describe('The selector of the element to press the key, find from the page source code')
+    }).strict(),
+
+    evaluateScriptSchema: z.object({
+        script: z.string().describe('The script to evaluate, eg: "document.querySelector(\'#username\').value = \'test\'"')
+    }).strict(),
 };

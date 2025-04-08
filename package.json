@@ -1,6 +1,6 @@
 {
   "name": "local-api-mcp-typescript",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "main": "index.js",
   "type": "commonjs",
   "bin": {
