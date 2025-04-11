@@ -61,4 +61,34 @@ export function registerTools(server: McpServer) {
 
     server.tool('get-page-visible-text', 'Get the visible text content of the page', schemas.emptySchema.shape,
         wrapHandler(automationHandlers.getPageVisibleText));
+
+    server.tool('get-page-html', 'Get the html content of the page', schemas.emptySchema.shape,
+        wrapHandler(automationHandlers.getPageHtml));
+
+    server.tool('click-element', 'Click the element', schemas.clickElementSchema.shape,
+        wrapHandler(automationHandlers.clickElement));
+
+    server.tool('fill-input', 'Fill the input', schemas.fillInputSchema.shape,
+        wrapHandler(automationHandlers.fillInput));
+
+    server.tool('select-option', 'Select the option', schemas.selectOptionSchema.shape,
+        wrapHandler(automationHandlers.selectOption));
+
+    server.tool('hover-element', 'Hover the element', schemas.hoverElementSchema.shape,
+        wrapHandler(automationHandlers.hoverElement));
+
+    server.tool('scroll-element', 'Scroll the element', schemas.scrollElementSchema.shape,
+        wrapHandler(automationHandlers.scrollElement));
+
+    server.tool('press-key', 'Press the key', schemas.pressKeySchema.shape,
+        wrapHandler(automationHandlers.pressKey));
+
+    server.tool('evaluate-script', 'Evaluate the script', schemas.evaluateScriptSchema.shape,
+        wrapHandler(automationHandlers.evaluateScript));
+
+    server.tool('drag-element', 'Drag the element', schemas.dragElementSchema.shape,
+        wrapHandler(automationHandlers.dragElement));
+
+    server.tool('iframe-click-element', 'Click the element in the iframe', schemas.iframeClickElementSchema.shape,
+        wrapHandler(automationHandlers.iframeClickElement));
 } 
