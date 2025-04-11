@@ -198,7 +198,7 @@ export const schemas = {
     }).strict(),
 
     scrollElementSchema: z.object({
-        selector: z.string().describe('The selector of the element to scroll, find from the page source code')
+        selector: z.string().describe('The selector of the element to scroll, find from the page source code, Simulates a user navigating page by scrolling, usually finding element in the bottom of the page')
     }).strict(),
 
     pressKeySchema: z.object({
@@ -208,5 +208,15 @@ export const schemas = {
 
     evaluateScriptSchema: z.object({
         script: z.string().describe('The script to evaluate, eg: "document.querySelector(\'#username\').value = \'test\'"')
+    }).strict(),
+
+    dragElementSchema: z.object({
+        selector: z.string().describe('The selector of the element to drag, find from the page source code'),
+        targetSelector: z.string().describe('The selector of the element to drag to, find from the page source code'),
+    }).strict(),
+
+    iframeClickElementSchema: z.object({
+        selector: z.string().describe('The selector of the element to click, find from the page source code'),
+        iframeSelector: z.string().describe('The selector of the iframe to click, find from the page source code')
     }).strict(),
 };

@@ -85,4 +85,10 @@ export function registerTools(server: McpServer) {
 
     server.tool('evaluate-script', 'Evaluate the script', schemas.evaluateScriptSchema.shape,
         wrapHandler(automationHandlers.evaluateScript));
+
+    server.tool('drag-element', 'Drag the element', schemas.dragElementSchema.shape,
+        wrapHandler(automationHandlers.dragElement));
+
+    server.tool('iframe-click-element', 'Click the element in the iframe', schemas.iframeClickElementSchema.shape,
+        wrapHandler(automationHandlers.iframeClickElement));
 } 

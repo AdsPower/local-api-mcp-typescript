@@ -19,3 +19,5 @@ export type HoverElementParams = z.infer<typeof schemas.hoverElementSchema>;
 export type ScrollElementParams = z.infer<typeof schemas.scrollElementSchema>;
 export type PressKeyParams = z.infer<typeof schemas.pressKeySchema>;
 export type EvaluateScriptParams = z.infer<typeof schemas.evaluateScriptSchema>;
+export type DragElementParams = z.infer<typeof schemas.dragElementSchema>;
+export type IframeClickElementParams = z.infer<typeof schemas.iframeClickElementSchema>;
